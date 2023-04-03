@@ -8,30 +8,28 @@ export const verifyToken = (req, res, next) => {
   }
 
   jwt.verify(token, process.env.JWT, (err, user) => {
-    if (err) {
-      return next(createError(403, "Token not valid"));
-      req.user = user;
-      next();
-    }
+    if (err) return next(createError(403, "Token not valid"));
+    req.user = user;
+    next();
   });
 };
 
 export const verifyUser = (req, res, next) => {
-  verifyToken(req, res, () => {
+  verifyToken(req, res, next, () => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
-      if (err) return next(createError(403, "You're not authorized"));
+      return next(createError(403, "You're not authorized"));
     }
   });
 };
 
 export const verifyAdmin = (req, res, next) => {
-  verifyToken(req, res, () => {
+  verifyToken(req, res, next, () => {
     if (req.user.isAdmin) {
       next();
     } else {
-      if (err) return next(createError(403, "You're not authorized"));
+      return next(createError(403, "You're not authorized"));
     }
   });
 };
