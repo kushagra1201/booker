@@ -8,11 +8,14 @@ const useFetch = (url) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // console.log(`useFetch(${url}) -> ...`);
       setLoading(true);
       try {
         const res = await axios.get(url);
+        // console.log(`useFetch(${url}) -> ${res.data}`);
         setData(res.data);
       } catch (err) {
+        // console.log(`useFetch(${url}) -> ${err}`);
         setError(err);
       }
       setLoading(false);
