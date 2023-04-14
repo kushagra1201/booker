@@ -4,6 +4,7 @@ import "./reserve.css";
 import useFetch from "../../hooks/useFetch.js";
 import { useContext, useState, useNavigate } from "react";
 import { SearchContext } from "../../context/SearchContext.js";
+import axios from "axios";
 
 const Reserve = ({ setOpen, hotelId }) => {
   const [selectedRooms, setSelectedRooms] = useState([]);
